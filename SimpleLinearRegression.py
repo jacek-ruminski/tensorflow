@@ -21,7 +21,7 @@ Wt=0.2
 bt=0.4
 y_training = Wt * x_training  + bt +noise
 
-
+print("\n Noise=", np.std(noise))
 
 # We can print our data
 print("\n x_training=", x_training)
@@ -71,6 +71,7 @@ for step in range(epochs):
         print(step, sess.run(W), sess.run(b))
 
 print("\nFinal loss: ", sess.run(loss))
+print("\nParameters:", sess.run(W), sess.run(b))
 
 # Calculate a simple difference between real data and the model
 diff=y_training-sess.run(y)
