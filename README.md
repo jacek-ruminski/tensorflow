@@ -1,3 +1,3 @@
 # tensorflow
 
-Test
+For education needs only
