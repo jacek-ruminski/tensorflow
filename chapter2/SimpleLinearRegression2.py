@@ -1,4 +1,5 @@
-#A simple linear regression example
+# A simple linear regression example
+# The role of placeholders
 
 import tensorflow as tf
 import numpy as np
@@ -47,8 +48,9 @@ y = tf.placeholder(tf.float32, [None,1], name="y")
 # The assumed model
 y_ = tf.add(tf.matmul(x,W),b)
 
-print(y_.dtype, y_.shape)
-print(y_training.dtype, y_training.shape)
+print("\n Shape of tensors:")
+print("W: %s, b: %s, x: %s, y: %s, y_: %s"%(W.shape,b.shape,x.shape,y.shape,y_.shape))
+
 
 # 2. We need to define the loss function - e.g. minimize the mean squared errors.
 loss = tf.reduce_mean(tf.square(y - y_))
@@ -65,10 +67,12 @@ init = tf.global_variables_initializer()
 # 5. All is ready - define the session and run the initialization process
 sess = tf.Session()
 sess.run(init)
+# Define a set of data to feed placeholders
 all_feed = { x: x_training, y: y_training }
 
 # 6. Now do the training, but do it in many trails (epochs)
 for step in range(epochs):
+    # execute the operation feeding placeholders with already defined source data
     sess.run(train, feed_dict=all_feed)
     loss_values.append(sess.run(loss, feed_dict=all_feed))
     #print results for some iterations
@@ -79,7 +83,7 @@ for step in range(epochs):
 print("\nFinal loss: ", sess.run(loss, feed_dict=all_feed))
 
 
-# Calculate simple difference between real data and the model
+# Calculate the normalized difference between real data and the model (in percents)
 diff=100*(y_training-sess.run(y_,feed_dict=all_feed))/y_training
 
 # Show results using plots
