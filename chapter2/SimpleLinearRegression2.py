@@ -16,14 +16,16 @@ epochs=1001
 #noise=0
 noise=np.random.rand(dataset_training_size).astype(np.float32)/20
 
-# Assume that our true description of the phenomena is
-# y = Wt* x  + bt + noise
+# Assume that our true model is y = Wt* x  + bt + noise
+
+# Generate random x values
 x_t = np.random.rand(dataset_training_size).astype(np.float32)
+# Sort data (for visualization needs only) and reshape to obtain an array
 x_training = (np.sort(x_t)).reshape(dataset_training_size,1)
 
-
-
 W_training=np.array([Wt])
+
+# Calculate "true" data using the assumed model and generated x values
 y_t=(np.dot(x_training,W_training.T)+bt+noise).astype(np.float32)
 y_training = np.transpose(np.array([y_t]));
 
@@ -77,8 +79,8 @@ for step in range(epochs):
     loss_values.append(sess.run(loss, feed_dict=all_feed))
     #print results for some iterations
     if step % 20 == 0:
-        print(step, sess.run(W), sess.run(b))
-        print("\nLoss: ", sess.run(loss, feed_dict=all_feed))
+        print("\nStep No:%s, parameters: %f %f" %(step, sess.run(W, feed_dict=all_feed), sess.run(b, feed_dict=all_feed)))
+        print("Loss: ", sess.run(loss, feed_dict=all_feed))
 
 print("\nFinal loss: ", sess.run(loss, feed_dict=all_feed))
 
