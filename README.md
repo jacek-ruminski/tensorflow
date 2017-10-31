@@ -1,3 +1,3 @@
 # tensorflow
 
-For education needs only
+For educational needs only
