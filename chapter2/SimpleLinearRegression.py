@@ -54,7 +54,8 @@ learnig_rate=0.01
 optimizer = tf.train.GradientDescentOptimizer(learnig_rate)
 train = optimizer.minimize(loss)
 
-# 4. Initialize all variables in TensorFlow
+# 4. Initialize all variables in TensorFlow - returns an object representing the initialization
+# operation - the real initialization will be run() later
 init = tf.global_variables_initializer()
 
 # 5. All is ready - define the session and run the initialization process
